@@ -6,6 +6,7 @@ use App\CodeResponse;
 use App\Constant;
 use App\Exceptions\BusinessException;
 use App\Input\GoodsListInput;
+use App\Jobs\SendMessage;
 use App\Services\CollectServices;
 use App\Services\CommentServices;
 use App\Services\Goods\BrandServices;
@@ -109,6 +110,7 @@ class GoodsController extends WxController
      */
     public function count()
     {
+        dispatch(new SendMessage());
         $count = GoodsServices::getInstance()->countGoodsOnSales();
         return $this->success($count);
     }

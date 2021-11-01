@@ -3,6 +3,7 @@
 namespace App\Models\Goods;
 
 use App\Models\BaseModel;
+use Laravel\Scout\Searchable;
 
 /**
  * App\Models\Goods\Goods
@@ -56,11 +57,17 @@ use App\Models\BaseModel;
  */
 class Goods extends BaseModel
 {
+    use Searchable;
     protected $casts = [
         'is_hot'     => 'boolean',
         'is_new'     => 'boolean',
         'is_on_sale' => 'boolean',
         'gallery'    => 'array'
     ];
+
+    public function searchableAs()
+    {
+        return "litemall_goods";
+    }
 
 }
